@@ -34,7 +34,7 @@ let alldata = [{ alu: 123 }];
 app.get("/", (req, res) => {
   res.status(200).json(JSON.stringify(alldata));
 });
-app.put("/appendData", (req, res) => {
+app.post("/a", (req, res) => {
   const newData = req.body;
   console.log(newData);
   alldata.push(newData);
