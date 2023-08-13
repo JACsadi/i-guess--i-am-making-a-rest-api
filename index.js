@@ -22,6 +22,41 @@ app.get("/", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+app.put("/appendData", async (req, res) => {
+  try {
+    const existingDataResponse = await fetch(
+      "https://example.com/external-data.json"
+    );
+    if (!existingDataResponse.ok) {
+      throw new Error("Request failed");
+    }
+
+    const existingData = await existingDataResponse.json();
+
+    const newData = req.body;
+    existingData.push(newData);
+
+    const updatedResponse = await fetch(
+      "https://example.com/external-data.json",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(existingData),
+      }
+    );
+
+    if (!updatedResponse.ok) {
+      throw new Error("Update request failed");
+    }
+
+    res.status(200).json({ message: "Data appended successfully" });
+  } catch (error) {
+    console.error("Error appending data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 // app.post("/addData", (req, res) => {
 //   const newData = req.body;
 //   console.log("hi");
