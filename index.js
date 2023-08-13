@@ -30,15 +30,17 @@ const fs = require("fs");
 const app = express();
 const PORT = 8000;
 app.use(express.json());
+
 let alldata = [{ alu: 123 }];
+
 app.get("/", (req, res) => {
-  res.status(200).json(JSON.stringify(alldata));
+  res.status(200).json(alldata); // Send the array directly as JSON
 });
 app.post("/a", (req, res) => {
-  const newData = req.body;
+  const newData = req.body; // req.body is already an object, no need to parse
   console.log(newData);
   alldata.push(newData);
-  res.status(200).json({ message: "Data added successfully", newData });
+  res.status(200).json({ message: "Data added successfully" });
 });
 // app.post("/addData", (req, res) => {
 //   const newData = req.body;
