@@ -3,7 +3,7 @@ const fs = require("fs");
 const app = express();
 const PORT = 8000;
 app.use(express.json());
-let alldata = [];
+let alldata = [{ alu: 123 }];
 app.get("/", (req, res) => {
   res.status(200).json(JSON.stringify(alldata));
 });
