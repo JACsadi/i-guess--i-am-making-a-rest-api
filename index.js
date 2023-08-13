@@ -34,5 +34,5 @@ app.put("/appendData", (req, res) => {
 //   });
 // });
 app.listen(PORT, () => {
-  console.log(`API is running at http://localhost:${PORT}`);
+  console.log(`API isz running at http://localhost:${PORT}`);
 });
