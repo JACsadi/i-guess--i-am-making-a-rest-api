@@ -6,16 +6,21 @@ app.use(express.json());
 const new_data = {
   name: "Hello",
 };
-app.get("/", (req, res) => {
-  fs.readFile("songs.json", "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).send("Internal Server Error");
+app.get("/", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json"
+    );
+    if (!response.ok) {
+      throw new Error("Request failed");
     }
 
-    const songs = JSON.parse(data);
-    res.status(200).json(songs);
-  });
+    const jsonData = await response.json();
+    res.status(200).json(jsonData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 // app.post("/addData", (req, res) => {
 //   const newData = req.body;
