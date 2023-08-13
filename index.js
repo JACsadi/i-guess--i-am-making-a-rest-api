@@ -3,40 +3,43 @@ const fs = require("fs");
 const app = express();
 const PORT = 8000;
 app.use(express.json());
-const new_data = {
-  name: "Hello",
-};
-app.get("/songs", (req, res) => {
-  fs.readFile("songs.json", "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).send("Internal Server Error");
-    }
+app.get("/", (req, res) => {
+  res.status(200).json({ songs: 12 });
+});
+// const new_data = {
+//   name: "Hello",
+// };
+// app.get("/songs", (req, res) => {
+//   fs.readFile("songs.json", "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading file:", err);
+//       return res.status(500).send("Internal Server Error");
+//     }
 
-    const songs = JSON.parse(data);
-    res.status(200).json(songs);
-  });
-});
-app.post("/addData", (req, res) => {
-  const newData = req.body;
-  console.log("hi");
-  fs.readFile("songs.json", "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).send("Internal Server Error");
-    }
+//     const songs = JSON.parse(data);
+//     res.status(200).json(songs);
+//   });
+// });
+// app.post("/addData", (req, res) => {
+//   const newData = req.body;
+//   console.log("hi");
+//   fs.readFile("songs.json", "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading file:", err);
+//       return res.status(500).send("Internal Server Error");
+//     }
 
-    const songs = JSON.parse(data);
-    songs.push(newData);
-    fs.writeFile("songs.json", JSON.stringify(songs), "utf-8", (writeErr) => {
-      if (writeErr) {
-        console.error("Error writing file:", writeErr);
-        return res.status(500).send("Internal Server Error");
-      }
-      res.status(201).json({ message: "Data added successfully", newData });
-    });
-  });
-});
-app.listen(PORT, () => {
-  console.log(`API is running at http://localhost:${PORT}`);
-});
+//     const songs = JSON.parse(data);
+//     songs.push(newData);
+//     fs.writeFile("songs.json", JSON.stringify(songs), "utf-8", (writeErr) => {
+//       if (writeErr) {
+//         console.error("Error writing file:", writeErr);
+//         return res.status(500).send("Internal Server Error");
+//       }
+//       res.status(201).json({ message: "Data added successfully", newData });
+//     });
+//   });
+// });
+// app.listen(PORT, () => {
+//   console.log(`API is running at http://localhost:${PORT}`);
+// });
