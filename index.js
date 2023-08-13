@@ -5,7 +5,7 @@ const PORT = 8000;
 app.use(express.json());
 let alldata = [];
 app.get("/", (req, res) => {
-  res.status(200).json(alldata);
+  res.status(200).json(alldataJSON.stringify(alldata));
 });
 app.put("/appendData", (req, res) => {
   const newData = req.body;
