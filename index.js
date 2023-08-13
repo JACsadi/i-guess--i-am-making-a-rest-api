@@ -9,6 +9,7 @@ app.get("/", (req, res) => {
 });
 app.put("/appendData", (req, res) => {
   const newData = req.body;
+  console.log(newData);
   alldata.push(newData);
   res.status(200).json({ message: "Data added successfully", newData });
 });
