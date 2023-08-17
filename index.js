@@ -17,9 +17,15 @@ app.get("/", (req, res) => {
 });
 app.post("/a", (req, res) => {
   const newData = req.body; // req.body is already an object, no need to parse
-  console.log(newData);
+  const ele = alldata.find(e => e.name === newData.name);
+  if(ele) {
+   alldata.map(a => {
+     if(a.name = newData.name) a.score = newDara.score;
+   }
+  } else {
   alldata.push(newData);
-  res.status(200).json({ message: "Data added successfully" });
+  }
+    res.status(200).json({ message: "Data added successfully" });
 });
 app.get("/element", (req, res) => {
   const name = req.query.name; // Extract the 'name' query parameter
