@@ -10,7 +10,7 @@ app.use((req, res, next) => {
 const PORT = 8000;
 app.use(express.json());
 
-let alldata = [{ alu: 123 }];
+let alldata = [];
 
 app.get("/", (req, res) => {
   res.status(200).json(alldata); // Send the array directly as JSON
@@ -21,6 +21,19 @@ app.post("/a", (req, res) => {
   alldata.push(newData);
   res.status(200).json({ message: "Data added successfully" });
 });
+app.get("/element", (req, res) => {
+  const name = req.query.name; // Extract the 'name' query parameter
+
+  // Find the element in your data based on the name
+  const foundElement = alldata.find(element => element.name === name);
+
+  if (foundElement) {
+    res.status(200).json(foundElement);
+  } else {
+    res.status(404).json({ message: "Element not found" });
+  }
+});
+
 // app.post("/addData", (req, res) => {
 //   const newData = req.body;
 //   console.log("hi");
