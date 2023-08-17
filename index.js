@@ -20,7 +20,7 @@ app.post("/a", (req, res) => {
   const ele = alldata.find(e => e.name === newData.name);
   if(ele) {
    alldata.map(a => {
-     if(a.name = newData.name) a.score = newDara.score;
+     if(a.name == newData.name) a.score = newDara.score;
    });
   } else {
   alldata.push(newData);
