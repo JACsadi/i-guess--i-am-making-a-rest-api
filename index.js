@@ -21,7 +21,7 @@ app.post("/a", (req, res) => {
   if(ele) {
    alldata.map(a => {
      if(a.name = newData.name) a.score = newDara.score;
-   }
+   });
   } else {
   alldata.push(newData);
   }
