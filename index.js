@@ -11,14 +11,15 @@ app.use((req, res, next) => {
 const PORT = 8000;
 app.use(express.json());
 app.get("/", (req, res) => {
-  res.status(200).json(alldata);
+  res.status(200).json(alldata.sort((a, b) => (a.score > b.score ? -1 : 1)));
 });
 app.post("/a", (req, res) => {
   const newData = req.body;
   const ele = alldata.find((e) => e.name === newData.name);
   if (ele) {
     alldata.map((a) => {
-      if (a.name == newData.name) a.score = newData.score;
+      if (a.name == newData.name)
+        a.score = a.score > newData.score ? a.score : newData.score;
     });
   } else {
     alldata.push(newData);
